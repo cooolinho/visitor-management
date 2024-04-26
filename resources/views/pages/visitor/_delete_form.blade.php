@@ -6,13 +6,13 @@
     @csrf
     <button type="submit" class="btn btn-danger" onclick="sureToDelete(event)">Löschen</button>
 </form>
+
 <script type="text/javascript">
     function sureToDelete(e){
         if(confirm('Are You sure you want to delete this?')){
             return true;
-        }else{
+        } else{
             e.preventDefault();
         }
     }
-
 </script>

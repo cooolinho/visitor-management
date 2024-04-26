@@ -23,9 +23,36 @@ class Visitor extends Model
         self::departureTime,
     ];
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return sprintf('%s %s', $this->firstname, $this->lastname);
+    }
+
+    /**
+     * @return string
+     */
+    public function getArrivalTime(): string
+    {
+        return (new Carbon($this->arrivalTime))->format(config('app.format.datetime'));
+    }
+
+    /**
+     * @return string
+     */
+    public function getStayTime(): string
+    {
+        $arrivalTime = Carbon::parse($this->arrivalTime);
+        $currentTime = Carbon::parse(now());
+
+        $difference = $arrivalTime->diff($currentTime);
+
+        $hours = $difference->h + ($difference->d * 24);
+        $minutes = $difference->i;
+
+        return "$hours Stunden und $minutes Minuten";
     }
 
     // Properties

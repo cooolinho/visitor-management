@@ -123,4 +123,9 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'format' => [
+        'datetime' => 'd.m.Y H:i',
+        'date' => 'd.m.Y',
+        'time' => 'H:i',
+    ]
 ];

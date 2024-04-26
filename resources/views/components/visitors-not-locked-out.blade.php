@@ -1,11 +1,5 @@
-@extends('layout.app')
-
-@section('body')
-    Besucher Übersicht
-    <ul>
-        <li><a href="{{ route('app.home') }}">zurück</a></li>
-        <li><a href="{{ route('app.visitor.create') }}">Besucher erstellen</a></li>
-    </ul>
+<div>
+    <h3>Besucher nicht ausgeloggt ({{ count($visitors) }})</h3>
 
     <table class="table table-sm">
         <thead>
@@ -13,7 +7,7 @@
             <th>Vorname</th>
             <th>Nachname</th>
             <th>Ankunftszeit</th>
-            <th>Abfahrtszeit</th>
+            <th>Dauer</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -22,8 +16,8 @@
             <tr>
                 <td>{{ $visitor->firstname }}</td>
                 <td>{{ $visitor->lastname }}</td>
-                <td>{{ $visitor->arrivalTime }}</td>
-                <td>{{ $visitor->departureTime }}</td>
+                <td>{{ $visitor->getArrivalTime() }}</td>
+                <td>{{ $visitor->getStayTime() }}</td>
                 <td>
                     <a href="{{ route('app.visitor.show', ['visitor' => $visitor->id]) }}">show</a>
                     <a href="{{ route('app.visitor.edit', ['visitor' => $visitor->id]) }}">edit</a>
@@ -32,4 +26,4 @@
         @endforeach
         </tbody>
     </table>
-@endsection
+</div>
