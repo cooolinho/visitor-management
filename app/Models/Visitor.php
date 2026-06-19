@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * @property int $id
  * @property string $firstname
  * @property string $lastname
  * @property Carbon $arrivalTime
@@ -42,10 +43,18 @@ class Visitor extends Model
     /**
      * @return string
      */
+    public function getDepartureTime(): string
+    {
+        return (new Carbon($this->departureTime))->format(config('app.format.datetime'));
+    }
+
+    /**
+     * @return string
+     */
     public function getStayTime(): string
     {
         $arrivalTime = Carbon::parse($this->arrivalTime);
-        $currentTime = Carbon::parse(now());
+        $currentTime = Carbon::parse($this->departureTime ? $this->departureTime : now());
 
         $difference = $arrivalTime->diff($currentTime);
 
@@ -53,6 +62,16 @@ class Visitor extends Model
         $minutes = $difference->i;
 
         return "$hours Stunden und $minutes Minuten";
+    }
+
+    /**
+     * @return void
+     */
+    public function logout(): void
+    {
+        self::update([
+            self::departureTime => Carbon::now(),
+        ]);
     }
 
     // Properties

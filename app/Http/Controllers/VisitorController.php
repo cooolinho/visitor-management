@@ -87,4 +87,14 @@ class VisitorController extends Controller
 
         return redirect(route('app.visitor.index'));
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function logout(Request $request, Visitor $visitor)
+    {
+        $visitor->logout();
+
+        return redirect($request->headers->get('referer'));
+    }
 }

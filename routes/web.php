@@ -13,3 +13,4 @@ Route::get('/visitor/{visitor}/show', [VisitorController::class, 'show'])->name(
 Route::get('/visitor/{visitor}/edit', [VisitorController::class, 'edit'])->name('app.visitor.edit');
 Route::post('/visitor/{visitor}/update', [VisitorController::class, 'update'])->name('app.visitor.update');
 Route::post('/visitor/{visitor}/destroy', [VisitorController::class, 'destroy'])->name('app.visitor.destroy');
+Route::post('/visitor/{visitor}/logout', [VisitorController::class, 'logout'])->name('app.visitor.logout');
